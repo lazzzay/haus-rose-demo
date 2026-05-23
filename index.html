@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haus Rose — Bed & Breakfast am Bodensee · Allensbach</title>
+<meta name="description" content="Drei Generationen Gastfreundschaft am Bodensee. Bed & Breakfast in Allensbach — mehr Zeit zum Träumen & Genießen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&family=Cookie&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terracotta: #C4663B;
+  --terracotta-deep: #9B4A22;
+  --terracotta-soft: #DE8B5A;
+  --rose: #D87171;
+  --rose-soft: #E8A8A8;
+  --cream: #F8F2E8;
+  --cream-warm: #F0E5D2;
+  --cream-deep: #E5D5BC;
+  --sand: #D8C3A0;
+  --bodensee: #3D6F8E;
+  --bodensee-soft: #6B96B0;
+  --leaf: #7A8C5F;
+  --charcoal: #2A2520;
+  --muted: #6B5F50;
+  --muted-light: #948674;
+  --paper: #FBF7EF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--paper);
+  color: var(--charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.serif { font-family: 'Cormorant Garamond', serif; }
+.script { font-family: 'Caveat', cursive; }
+.cookie { font-family: 'Cookie', cursive; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* WATERCOLOR TEXTURE OVERLAY — subtle aquarell paper feel */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(216, 113, 113, 0.025) 0%, transparent 30%),
+    radial-gradient(circle at 85% 35%, rgba(196, 102, 59, 0.02) 0%, transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(122, 140, 95, 0.02) 0%, transparent 35%);
+  mix-blend-mode: multiply;
+}
+
+/* LOADER */
+.loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--paper);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loader.gone { opacity: 0; visibility: hidden; }
+.loader-rose {
+  width: 80px; height: 80px;
+  position: relative;
+  animation: rosePulse 1.8s ease-in-out infinite;
+}
+@keyframes rosePulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.92); opacity: 0.7; } }
+.loader-text {
+  font-family: 'Cookie', cursive;
+  font-size: 36px;
+  color: var(--terracotta-deep);
+}
+.loader-bar { width: 160px; height: 1px; background: rgba(196, 102, 59, 0.2); overflow: hidden; position: relative; }
+.loader-bar::after { content: ''; position: absolute; top: 0; left: 0; width: 30%; height: 100%; background: var(--terracotta); animation: loaderSlide 1.6s ease-in-out infinite; }
+@keyframes loaderSlide { 0% { left: -30%; } 100% { left: 100%; } }
+
+/* SCROLL PROGRESS */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; background: var(--terracotta);
+  z-index: 9998; width: 0;
+  transition: width 0.08s ease-out;
+}
+
+/* TOP NAV */
+nav.top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  padding: 18px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(251, 247, 239, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(196, 102, 59, 0.08);
+  transition: all 0.3s;
+}
+.logo {
+  display: flex; align-items: center; gap: 14px;
+}
+.logo-mark {
+  position: relative;
+  width: 48px; height: 48px;
+}
+.logo-mark svg { width: 100%; height: 100%; }
+.logo-text { line-height: 1.05; }
+.logo-text .haus {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 400;
+  color: var(--charcoal); letter-spacing: 0.5px;
+}
+.logo-text .rose {
+  font-family: 'Cookie', cursive;
+  font-size: 26px; color: var(--terracotta-deep);
+  margin-top: -4px; display: block;
+}
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 500; color: var(--charcoal); position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -6px;
+  width: 0; height: 1px; background: var(--terracotta);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-phone {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 500;
+  color: var(--terracotta-deep);
+}
+.nav-phone svg { width: 14px; height: 14px; }
+.nav-cta {
+  background: var(--terracotta);
+  color: var(--paper);
+  padding: 12px 24px;
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+.nav-cta:hover { background: var(--terracotta-deep); }
+
+/* HERO — Editorial Magazine Style */
+.hero {
+  min-height: 100vh;
+  padding: 120px 32px 80px;
+  position: relative;
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+  background:
+    linear-gradient(180deg, transparent 70%, rgba(216, 195, 160, 0.2) 100%),
+    var(--paper);
+  max-width: 1480px; margin: 0 auto;
+}
+.hero-meta {
+  position: absolute; top: 96px; left: 48px; right: 48px;
+  display: flex; justify-content: space-between;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--muted-light);
+  font-weight: 500;
+}
+.hero-meta .divider {
+  display: inline-block; width: 24px; height: 1px;
+  background: var(--terracotta); margin: 0 8px;
+  vertical-align: middle;
+}
+.hero-text {
+  position: relative;
+  padding-left: 32px;
+}
+.hero-kicker {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  color: var(--terracotta-deep);
+  margin-bottom: 18px;
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 6.8vw, 96px);
+  line-height: 0.98;
+  font-weight: 300;
+  color: var(--charcoal);
+  letter-spacing: -2px;
+  margin-bottom: 32px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--terracotta-deep);
+  font-family: 'Cormorant Garamond', serif;
+}
+.hero h1 .cookie-script {
+  font-family: 'Cookie', cursive;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.9em;
+  color: var(--rose);
+  letter-spacing: 1px;
+}
+.hero-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 48px;
+  max-width: 520px;
+}
+.hero-quote::before {
+  content: '— '; color: var(--terracotta);
+}
+.hero-ctas {
+  display: flex; align-items: center; gap: 28px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 18px 36px;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 12px;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--terracotta-deep); }
+.btn-primary .arrow { transition: transform 0.3s; }
+.btn-primary:hover .arrow { transform: translateX(6px); }
+.text-link {
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  border-bottom: 1px solid rgba(107, 95, 80, 0.3);
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+.text-link:hover { color: var(--terracotta-deep); border-bottom-color: var(--terracotta); }
+
+.hero-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  background-image:
+    linear-gradient(180deg, rgba(42, 37, 32, 0.05) 0%, rgba(42, 37, 32, 0.25) 100%),
+    url('https://images.unsplash.com/photo-1518733057094-95b53143d2a7?auto=format&fit=crop&w=900&q=85');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hero-image::after {
+  content: ''; position: absolute; inset: 14px;
+  border: 1px solid rgba(248, 242, 232, 0.4);
+  pointer-events: none;
+}
+.hero-image-caption {
+  position: absolute; bottom: 32px; left: 32px;
+  background: var(--paper);
+  padding: 14px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+  border-left: 3px solid var(--terracotta);
+}
+.hero-image-caption .label {
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--muted-light); font-weight: 500;
+}
+.hero-image-caption .value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-style: italic;
+  color: var(--charcoal);
+}
+
+/* AVAILABILITY STRIP */
+.availability {
+  background: var(--cream-warm);
+  padding: 24px 48px;
+  border-top: 1px solid rgba(196, 102, 59, 0.15);
+  border-bottom: 1px solid rgba(196, 102, 59, 0.15);
+}
+.avail-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.avail-tag {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 500; color: var(--terracotta-deep);
+}
+.avail-tag .dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--leaf);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(122, 140, 95, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(122, 140, 95, 0); }
+}
+.avail-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-style: italic;
+  color: var(--charcoal);
+  flex: 1;
+  text-align: center;
+}
+.avail-text strong { color: var(--terracotta-deep); font-style: normal; font-weight: 500; }
+.avail-link {
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 500;
+  border-bottom: 1px solid var(--terracotta);
+  padding-bottom: 3px;
+}
+
+/* REASONS ROTATOR */
+.reasons {
+  padding: 140px 32px;
+  background:
+    radial-gradient(ellipse at center, rgba(216, 195, 160, 0.18) 0%, transparent 60%),
+    var(--paper);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.reasons-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  color: var(--terracotta-deep);
+  margin-bottom: 28px;
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+.reasons-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.05;
+  color: var(--charcoal);
+  font-weight: 300;
+  letter-spacing: -1.2px;
+  display: flex; flex-wrap: wrap; gap: 0.3em;
+  justify-content: center; align-items: baseline;
+}
+.reasons-static { color: var(--charcoal); }
+.reasons-rotator {
+  position: relative;
+  display: inline-block;
+  min-width: 7ch;
+  height: 1.1em;
+}
+.rotating-word {
+  position: absolute; left: 50%; top: 0;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  white-space: nowrap;
+  color: var(--terracotta-deep);
+  font-style: italic;
+  transition: opacity 0.6s, transform 0.6s;
+}
+.rotating-word.active { opacity: 1; transform: translateX(-50%) translateY(0); }
+.rotating-word.exiting { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+
+/* MANIFESTO */
+.manifesto {
+  background: var(--cream);
+  padding: 160px 32px 140px;
+  text-align: center;
+  position: relative;
+  border-top: 1px solid rgba(196, 102, 59, 0.1);
+}
+.manifesto-eyebrow {
+  font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--terracotta-deep);
+  font-weight: 500;
+  margin-bottom: 36px;
+}
+.manifesto h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5.5vw, 76px);
+  line-height: 1.05;
+  font-weight: 300;
+  color: var(--charcoal);
+  letter-spacing: -1.5px;
+  max-width: 980px; margin: 0 auto;
+}
+.manifesto h2 em { font-style: italic; color: var(--terracotta-deep); }
+.manifesto h2 .cookie-script {
+  font-family: 'Cookie', cursive;
+  font-style: normal;
+  font-size: 0.95em;
+  color: var(--rose);
+}
+.manifesto-anaphora {
+  margin: 64px auto 0;
+  max-width: 720px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.manifesto-anaphora p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-style: italic;
+  color: var(--charcoal);
+  line-height: 1.4;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s, transform 0.9s;
+}
+.manifesto-anaphora.in p { opacity: 1; transform: translateY(0); }
+.manifesto-anaphora.in p:nth-child(1) { transition-delay: 0.05s; }
+.manifesto-anaphora.in p:nth-child(2) { transition-delay: 0.18s; }
+.manifesto-anaphora.in p:nth-child(3) { transition-delay: 0.31s; }
+.manifesto-anaphora.in p:nth-child(4) { transition-delay: 0.44s; }
+.manifesto-anaphora.in p:nth-child(5) { transition-delay: 0.57s; }
+.manifesto-anaphora.in p:nth-child(6) { transition-delay: 0.70s; }
+.manifesto-anaphora .finale {
+  font-size: 40px; color: var(--terracotta-deep);
+  margin-top: 18px;
+}
+.manifesto-anaphora .finale em {
+  font-family: 'Cookie', cursive; font-style: normal; font-size: 52px;
+  color: var(--terracotta-deep);
+}
+.manifesto-tagline {
+  margin-top: 64px;
+  font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--muted);
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+}
+.manifesto-tagline .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--terracotta); }
+
+/* FOUNDER / FAMILY STORY */
+.family-story {
+  padding: 160px 32px;
+  background: var(--paper);
+  position: relative;
+}
+.family-story::before {
+  content: 'Rose'; position: absolute;
+  top: 60px; left: 50%; transform: translateX(-50%);
+  font-family: 'Cookie', cursive;
+  font-size: 200px;
+  color: rgba(216, 113, 113, 0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+.family-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 0.85fr 1fr;
+  gap: 96px;
+  position: relative; z-index: 2;
+}
+.family-portrait {
+  position: sticky; top: 120px;
+  align-self: start;
+}
+.portrait-stack {
+  position: relative; aspect-ratio: 3/4;
+  background: var(--cream-warm);
+  background-image:
+    linear-gradient(180deg, rgba(42, 37, 32, 0.05) 0%, rgba(42, 37, 32, 0.35) 100%),
+    url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=85');
+  background-size: cover; background-position: center;
+  border: 1px solid rgba(196, 102, 59, 0.18);
+}
+.portrait-stack::after {
+  content: ''; position: absolute; inset: 12px;
+  border: 1px solid rgba(248, 242, 232, 0.4);
+  pointer-events: none;
+}
+.portrait-handnote {
+  position: absolute; bottom: -16px; right: -16px;
+  background: var(--paper);
+  padding: 14px 18px;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: var(--terracotta-deep);
+  transform: rotate(-2deg);
+  box-shadow: 0 8px 24px rgba(42, 37, 32, 0.08);
+}
+.family-text { padding-top: 8px; }
+.family-eyebrow {
+  font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--terracotta-deep);
+  font-weight: 500; margin-bottom: 28px;
+}
+.family-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 4.5vw, 60px);
+  line-height: 1.05; font-weight: 300;
+  color: var(--charcoal);
+  letter-spacing: -1.2px;
+  margin-bottom: 40px;
+}
+.family-text h2 em { font-style: italic; color: var(--terracotta-deep); }
+.family-text h2 .cookie-script { font-family: 'Cookie', cursive; font-style: normal; color: var(--rose); font-size: 0.95em; }
+.family-text .lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic;
+  line-height: 1.5; color: var(--charcoal);
+  margin-bottom: 24px;
+}
+.family-text p { font-size: 16px; line-height: 1.8; color: var(--muted); margin-bottom: 18px; }
+.family-text em { color: var(--terracotta-deep); font-style: italic; }
+.generations {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+  padding: 32px 0;
+  border-top: 1px solid rgba(196, 102, 59, 0.2);
+  border-bottom: 1px solid rgba(196, 102, 59, 0.2);
+}
+.gen-person {
+  text-align: center;
+}
+.gen-photo {
+  width: 64px; height: 64px; border-radius: 50%;
+  margin: 0 auto 12px;
+  background: var(--cream-warm);
+  background-size: cover; background-position: center;
+  border: 2px solid var(--terracotta-soft);
+}
+.gen-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.gen-role {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted-light);
+}
+.family-motto {
+  margin: 48px 0;
+  padding: 32px;
+  background: var(--cream-warm);
+  border-left: 3px solid var(--terracotta);
+}
+.family-motto p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-style: italic;
+  color: var(--charcoal);
+  line-height: 1.4;
+  margin-bottom: 12px !important;
+}
+.family-motto .sig {
+  font-family: 'Cookie', cursive;
+  font-size: 26px;
+  color: var(--terracotta-deep);
+}
+@media (max-width: 980px) {
+  .family-inner { grid-template-columns: 1fr; gap: 56px; }
+  .family-portrait { position: relative; top: 0; max-width: 400px; margin: 0 auto; }
+  .generations { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ROOMS — Editorial Cards */
+.rooms {
+  padding: 160px 32px;
+  background: var(--cream);
+  position: relative;
+}
+.rooms::before {
+  content: 'I.'; position: absolute;
+  top: 80px; left: 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px; font-style: italic;
+  color: rgba(196, 102, 59, 0.12);
+  pointer-events: none;
+}
+.section-head {
+  text-align: center;
+  margin-bottom: 80px;
+  max-width: 720px; margin-left: auto; margin-right: auto;
+}
+.section-head .eyebrow {
+  font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--terracotta-deep);
+  font-weight: 500; margin-bottom: 24px;
+}
+.section-head h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1.05; font-weight: 300;
+  color: var(--charcoal);
+  letter-spacing: -1.2px;
+  margin-bottom: 24px;
+}
+.section-head h2 em { font-style: italic; color: var(--terracotta-deep); }
+.section-head .sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-style: italic;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.rooms-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  max-width: 1340px; margin: 0 auto;
+}
+.room-card {
+  background: var(--paper);
+  position: relative;
+  transition: transform 0.4s;
+}
+.room-card:hover { transform: translateY(-6px); }
+.room-image {
+  aspect-ratio: 4/5;
+  background-size: cover; background-position: center;
+  position: relative;
+  margin-bottom: 24px;
+}
+.room-image::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(42, 37, 32, 0.4) 100%);
+}
+.room-tag {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  background: var(--paper);
+  padding: 6px 12px;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 500; color: var(--terracotta-deep);
+}
+.room-num {
+  position: absolute; bottom: 20px; right: 20px; z-index: 2;
+  font-family: 'Cookie', cursive;
+  font-size: 38px;
+  color: var(--cream);
+}
+.room-body { padding: 0 8px 8px; }
+.room-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.room-body h3 em { font-style: italic; color: var(--terracotta-deep); }
+.room-body .detail {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+.room-body p {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+.room-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 16px;
+  border-top: 1px solid rgba(196, 102, 59, 0.15);
+}
+.room-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--terracotta-deep);
+}
+.room-price .from { font-size: 11px; color: var(--muted-light); letter-spacing: 1.5px; text-transform: uppercase; }
+.room-link {
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  font-weight: 500;
+  color: var(--charcoal);
+  border-bottom: 1px solid var(--terracotta);
+  padding-bottom: 2px;
+}
+
+.room-1 { background-image: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=900&q=85'); }
+.room-2 { background-image: url('https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=900&q=85'); }
+.room-3 { background-image: url('https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=85'); }
+.room-4 { background-image: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=85'); }
+.room-5 { background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=85'); }
+.room-6 { background-image: url('https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=900&q=85'); }
+.room-7 { background-image: url('https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=900&q=85'); }
+.room-8 { background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=900&q=85'); }
+.room-9 { background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=85'); }
+.room-10 { background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=85'); }
+
+.room-num {
+  font-size: 24px !important;
+  letter-spacing: 0.5px;
+}
+.rooms-pricing-note {
+  max-width: 980px; margin: 64px auto 0;
+  padding: 24px 32px;
+  background: var(--paper);
+  border-left: 3px solid var(--terracotta);
+  text-align: center;
+}
+.rooms-pricing-note p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: var(--charcoal);
+  line-height: 1.7;
+}
+.rooms-pricing-note em { color: var(--terracotta-deep); font-style: italic; font-weight: 500; }
+
+@media (max-width: 980px) {
+  .rooms-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .rooms-grid { grid-template-columns: 1fr; }
+}
+
+/* BREAKFAST */
+.breakfast {
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 160px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.breakfast::before {
+  content: 'Frühstück'; position: absolute;
+  bottom: -40px; left: -20px;
+  font-family: 'Cookie', cursive;
+  font-size: 280px;
+  color: rgba(216, 113, 113, 0.05);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.breakfast-grid {
+  max-width: 1340px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative; z-index: 2;
+}
+.breakfast-text .eyebrow {
+  font-size: 11px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--terracotta-soft);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.breakfast-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1; font-weight: 300;
+  letter-spacing: -1.5px;
+  color: var(--cream);
+  margin-bottom: 36px;
+}
+.breakfast-text h2 em { font-style: italic; color: var(--terracotta-soft); }
+.breakfast-text h2 .cookie-script { font-family: 'Cookie', cursive; font-style: normal; color: var(--rose-soft); font-size: 1em; }
+.breakfast-text > p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-style: italic;
+  line-height: 1.6;
+  color: rgba(248, 242, 232, 0.85);
+  margin-bottom: 36px;
+  max-width: 480px;
+}
+.breakfast-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(216, 113, 113, 0.25);
+}
+.breakfast-list li {
+  display: flex; gap: 20px; align-items: baseline;
+  font-size: 16px;
+  color: rgba(248, 242, 232, 0.92);
+}
+.breakfast-list li .b-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--terracotta-soft);
+  min-width: 32px;
+}
+.breakfast-list li em {
+  font-style: italic;
+  color: var(--rose-soft);
+  font-family: 'Cormorant Garamond', serif;
+}
+.breakfast-image {
+  aspect-ratio: 4/5;
+  background-image:
+    linear-gradient(180deg, transparent 40%, rgba(42, 37, 32, 0.6) 100%),
+    url('https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85');
+  background-size: cover; background-position: center;
+  position: relative;
+}
+.breakfast-image::after {
+  content: ''; position: absolute; inset: 14px;
+  border: 1px solid rgba(248, 242, 232, 0.2);
+}
+.breakfast-caption {
+  position: absolute; bottom: 32px; left: 32px;
+  padding: 14px 18px;
+  background: rgba(42, 37, 32, 0.85);
+  backdrop-filter: blur(8px);
+  border-left: 3px solid var(--rose);
+}
+.breakfast-caption .label {
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--terracotta-soft); margin-bottom: 4px;
+}
+.breakfast-caption .value {
+  font-family: 'Cookie', cursive;
+  font-size: 24px;
+  color: var(--cream);
+}
+@media (max-width: 980px) {
+  .breakfast-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+
+/* BODENSEE EXPERIENCES */
+.experiences {
+  padding: 160px 32px;
+  background: var(--paper);
+  position: relative;
+}
+.experiences::before {
+  content: 'II.'; position: absolute;
+  top: 80px; right: 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px; font-style: italic;
+  color: rgba(61, 111, 142, 0.12);
+  pointer-events: none;
+}
+.exp-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 1280px; margin: 0 auto;
+}
+.exp-card {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--cream-warm);
+}
+.exp-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.exp-card:hover .exp-card-bg { transform: scale(1.05); }
+.exp-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(42, 37, 32, 0.0) 30%, rgba(42, 37, 32, 0.7) 100%);
+}
+.exp-card-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px;
+  color: var(--cream);
+  z-index: 2;
+}
+.exp-card-meta {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--cream-deep);
+  margin-bottom: 12px;
+}
+.exp-card-meta .distance {
+  background: var(--terracotta);
+  color: var(--paper);
+  padding: 4px 10px;
+}
+.exp-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.exp-card h3 em { font-style: italic; color: var(--rose-soft); }
+.exp-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic;
+  color: rgba(248, 242, 232, 0.85);
+  line-height: 1.5;
+}
+.exp-1 { background-image: url('https://images.unsplash.com/photo-1547721064-da6cfb341d50?auto=format&fit=crop&w=1200&q=85'); }
+.exp-2 { background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85'); }
+.exp-3 { background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85'); }
+.exp-4 { background-image: url('https://images.unsplash.com/photo-1505839673365-e3971f8d9184?auto=format&fit=crop&w=1200&q=85'); }
+@media (max-width: 760px) {
+  .exp-grid { grid-template-columns: 1fr; }
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  padding: 160px 32px;
+  background: var(--cream);
+}
+.test-stage {
+  max-width: 920px; margin: 0 auto;
+  position: relative;
+  min-height: 320px;
+  text-align: center;
+}
+.testimonial {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s;
+  pointer-events: none;
+}
+.testimonial.active { opacity: 1; pointer-events: auto; }
+.test-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 300; font-style: italic;
+  line-height: 1.4;
+  color: var(--charcoal);
+  margin-bottom: 36px;
+  position: relative;
+}
+.test-quote::before, .test-quote::after {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--terracotta);
+  font-size: 84px;
+  position: absolute;
+  font-style: normal;
+  line-height: 1;
+  opacity: 0.4;
+}
+.test-quote::before { content: '"'; top: -28px; left: -8px; }
+.test-quote::after { content: '"'; bottom: -56px; right: -8px; }
+.test-author {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.test-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background-size: cover; background-position: center;
+  border: 2px solid var(--terracotta);
+}
+.test-info { text-align: left; }
+.test-info .name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 500; color: var(--charcoal); }
+.test-info .role { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--terracotta-deep); margin-top: 2px; }
+.test-dots {
+  display: flex; justify-content: center; gap: 10px;
+  margin-top: 64px;
+}
+.test-dot {
+  width: 28px; height: 1px;
+  background: rgba(196, 102, 59, 0.25);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.test-dot.active { background: var(--terracotta); height: 2px; }
+.test-dot:hover { background: var(--terracotta-deep); }
+
+/* BOOKING CTA */
+.booking {
+  padding: 160px 32px;
+  background:
+    linear-gradient(165deg, var(--terracotta) 0%, var(--terracotta-deep) 100%);
+  color: var(--cream);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.booking::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(248, 242, 232, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(248, 242, 232, 0.08) 0%, transparent 40%);
+}
+.booking-inner { position: relative; max-width: 720px; margin: 0 auto; }
+.booking-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  color: var(--rose-soft);
+  margin-bottom: 20px;
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+.booking h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5.5vw, 76px);
+  line-height: 1.05;
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  margin-bottom: 32px;
+}
+.booking h2 em { font-style: italic; color: var(--rose-soft); }
+.booking p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 48px;
+  color: rgba(248, 242, 232, 0.92);
+}
+.booking-phone {
+  display: inline-flex; align-items: center; gap: 16px;
+  background: var(--paper);
+  color: var(--terracotta-deep);
+  padding: 24px 40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  transition: all 0.3s;
+}
+.booking-phone svg { width: 22px; height: 22px; }
+.booking-phone:hover { background: var(--charcoal); color: var(--cream); }
+.booking-alt {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(248, 242, 232, 0.78);
+}
+.booking-alt a { color: var(--rose-soft); border-bottom: 1px solid var(--rose-soft); padding-bottom: 1px; }
+.booking-perks {
+  display: flex; flex-direction: column; gap: 8px;
+  align-items: center;
+  margin: 24px 0 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: rgba(248, 242, 232, 0.85);
+  font-style: italic;
+}
+.booking-perks .perk {
+  letter-spacing: 0.3px;
+}
+
+/* FOOTER */
+.site-footer {
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 100px 32px 32px;
+  position: relative;
+}
+.footer-grid {
+  max-width: 1280px; margin: 0 auto 60px;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.footer-brand .logo-mark { width: 56px; height: 56px; margin-bottom: 20px; }
+.footer-brand .footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 400; color: var(--cream);
+  margin-bottom: 6px;
+}
+.footer-brand .footer-name em { font-family: 'Cookie', cursive; font-size: 36px; color: var(--terracotta-soft); font-style: normal; }
+.footer-brand .footer-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic;
+  color: rgba(248, 242, 232, 0.55);
+  margin-bottom: 24px;
+}
+.footer-brand .footer-address {
+  font-size: 13px; line-height: 1.7; color: rgba(248, 242, 232, 0.7);
+}
+.footer-col h5 {
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--terracotta-soft);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: rgba(248, 242, 232, 0.7);
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--cream); }
+.footer-easter {
+  max-width: 1280px; margin: 0 auto;
+  padding: 48px 0 16px;
+  border-top: 1px solid rgba(196, 102, 59, 0.15);
+  text-align: center;
+}
+.footer-easter .easter-motto {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-style: italic;
+  color: var(--terracotta-soft); font-weight: 300;
+  margin-bottom: 12px;
+}
+.footer-easter .easter-motto em {
+  font-family: 'Cookie', cursive;
+  font-style: normal;
+  font-size: 32px;
+  color: var(--rose-soft);
+}
+.footer-easter .easter-note {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  color: rgba(216, 113, 113, 0.7);
+}
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto;
+  border-top: 1px solid rgba(196, 102, 59, 0.15);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(248, 242, 232, 0.5);
+  letter-spacing: 1.5px;
+}
+
+/* DEMO BADGE */
+.demo-badge {
+  position: fixed; top: 88px; right: 24px;
+  background: var(--charcoal); color: var(--cream);
+  padding: 8px 14px;
+  font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  z-index: 80;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  border: 1px solid var(--terracotta);
+  line-height: 1.3;
+  opacity: 0.88;
+}
+.demo-badge strong { color: var(--terracotta-soft); display: inline; font-size: 9px; }
+
+/* FIRSTS TIMELINE */
+.firsts {
+  padding: 160px 32px;
+  background: var(--paper);
+  position: relative;
+}
+.firsts::before {
+  content: 'III.'; position: absolute;
+  top: 80px; left: 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px; font-style: italic;
+  color: rgba(196, 102, 59, 0.12);
+  pointer-events: none;
+}
+.timeline {
+  max-width: 880px; margin: 0 auto;
+  position: relative;
+  padding-left: 36px;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 10px; top: 12px; bottom: 12px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--terracotta) 0%, rgba(196, 102, 59, 0.15) 100%);
+}
+.time-event {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px;
+  padding-bottom: 56px;
+  position: relative;
+}
+.time-event::before {
+  content: ''; position: absolute; left: -32px; top: 14px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--terracotta);
+  border: 3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--terracotta);
+}
+.time-event.finale::before {
+  background: var(--rose);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.time-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-style: italic;
+  color: var(--terracotta-deep);
+  line-height: 1;
+}
+.time-detail h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.time-detail p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.time-detail p em {
+  color: var(--terracotta-deep);
+  font-style: italic;
+}
+.time-event.finale .time-detail h4 { color: var(--terracotta-deep); }
+
+/* SUSTAINABILITY */
+.sustainability {
+  padding: 160px 32px;
+  background: var(--cream);
+  position: relative;
+}
+.sustain-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.sustain-item {
+  padding: 32px 28px;
+  background: var(--paper);
+  border-top: 2px solid var(--leaf);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.sustain-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(42, 37, 32, 0.06);
+}
+.sustain-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  display: block;
+}
+.sustain-item h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px; font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.sustain-item p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* TRUST STRIP */
+.trust {
+  padding: 140px 32px;
+  background: var(--cream-warm);
+}
+.trust .section-head { margin-bottom: 64px; }
+.trust-grid {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.trust-item {
+  text-align: center;
+  padding: 40px 28px;
+  background: var(--paper);
+  border-top: 1px solid var(--terracotta);
+}
+.trust-item.highlight {
+  border-top: 2px solid var(--terracotta);
+  background: linear-gradient(180deg, rgba(216, 113, 113, 0.06) 0%, var(--paper) 100%);
+  transform: scale(1.04);
+}
+.trust-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--terracotta-deep);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.trust-num span {
+  font-size: 32px;
+  color: var(--terracotta);
+}
+.trust-platform {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+.trust-count {
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted);
+}
+.trust-sub {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(196, 102, 59, 0.18);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; font-style: italic;
+  color: var(--muted);
+}
+.trust-finepoint {
+  max-width: 720px; margin: 56px auto 0;
+  text-align: center;
+}
+.trust-finepoint p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic;
+  color: var(--muted); line-height: 1.6;
+}
+.trust-finepoint em { color: var(--terracotta-deep); font-weight: 500; }
+
+@media (max-width: 980px) {
+  .sustain-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-grid { grid-template-columns: 1fr; }
+  .trust-item.highlight { transform: scale(1); }
+}
+@media (max-width: 640px) {
+  .sustain-grid { grid-template-columns: 1fr; }
+  .time-event { grid-template-columns: 1fr; gap: 12px; }
+  .time-year { font-size: 28px; }
+}
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-meta { position: relative; top: 0; left: 0; right: 0; margin-bottom: 32px; }
+}
+@media (max-width: 760px) {
+  nav.top { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .nav-phone { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-text { padding-left: 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .reasons { padding: 80px 20px; }
+  .reasons-line { font-size: 36px; flex-direction: column; gap: 4px; }
+  .manifesto { padding: 80px 20px; }
+  .manifesto-anaphora p { font-size: 22px; }
+  .manifesto-anaphora .finale { font-size: 30px; }
+  .manifesto-anaphora .finale em { font-size: 40px; }
+  .family-story, .rooms, .breakfast, .experiences, .testimonials, .booking { padding: 80px 20px; }
+  .booking-phone { font-size: 24px; padding: 18px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-rose">
+    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(40,40)">
+        <circle r="20" fill="none" stroke="#D87171" stroke-width="1.5" opacity="0.4"/>
+        <circle r="12" fill="#D87171" opacity="0.6"/>
+        <circle r="6" fill="#9B4A22"/>
+        <circle r="2" fill="#F8F2E8"/>
+      </g>
+    </svg>
+  </div>
+  <div class="loader-text">Haus Rose</div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <!-- Aquarell-style: little house on left, rose on right -->
+        <g>
+          <!-- House (left) -->
+          <path d="M4 26 L13 18 L22 26 L22 38 L4 38 Z" fill="#6B96B0" opacity="0.85"/>
+          <path d="M4 26 L13 18 L22 26" fill="none" stroke="#3D6F8E" stroke-width="0.8"/>
+          <rect x="11" y="29" width="4" height="9" fill="#F8F2E8" opacity="0.7"/>
+          <circle cx="13" cy="22" r="1" fill="#9B4A22" opacity="0.5"/>
+          <!-- Rose (right) -->
+          <g transform="translate(33, 24)">
+            <circle r="12" fill="#D87171" opacity="0.85"/>
+            <circle r="7" fill="#C4663B" opacity="0.7"/>
+            <circle r="3.5" fill="#9B4A22"/>
+            <ellipse cx="-6" cy="6" rx="6" ry="3" fill="#7A8C5F" opacity="0.7" transform="rotate(-30)"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <div class="haus">HAUS</div>
+      <span class="rose">Rose</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#zimmer">Zimmer</a>
+    <a href="#fruehstueck">Frühstück</a>
+    <a href="#bodensee">Bodensee</a>
+    <a href="#familie">Familie</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+4975333100" class="nav-phone">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.02.24l-2.2 2.2a15.07 15.07 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
+      07533/3100
+    </a>
+    <a href="#kontakt" class="nav-cta">Anfragen</a>
+  </div>
+</nav>
+
+<!-- DEMO BADGE -->
+<div class="demo-badge">
+  <strong>Mockup für Stefan</strong>
+  <div style="margin-top: 2px;">Louis Lazay · v2 · auf eurer DNA</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-meta">
+    <div>VOL. I · ALLENSBACH AM BODENSEE</div>
+    <div>SEIT DREI GENERATIONEN <span class="divider"></span> EST. ROSE</div>
+  </div>
+  <div class="hero-text">
+    <div class="hero-kicker">~ bed, breakfast & more ~</div>
+    <h1>
+      Mehr Zeit zum<br>
+      <em>Träumen</em> <span class="cookie-script">&</span><br>
+      <em>Genießen.</em>
+    </h1>
+    <p class="hero-quote">Hotel garni Haus Rose · Allensbach am Bodensee · seit 1983 dieselbe Familie, derselbe Pioniergeist.</p>
+    <div class="hero-ctas">
+      <a href="#zimmer" class="btn-primary">Unsere 10 Zimmer <span class="arrow">→</span></a>
+      <a href="#familie" class="text-link">… oder lerne die Helmlingers kennen</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-caption">
+      <div class="label">Aufgenommen heute</div>
+      <div class="value">Balkon mit Blumenkästen.<br>Allensbach, Mai 2026.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AVAILABILITY -->
+<section class="availability">
+  <div class="avail-inner">
+    <div class="avail-tag"><div class="dot"></div>Verfügbar</div>
+    <div class="avail-text">350 m zum Bodensee-Ufer · 250 m zum Bahnhof · und mit der <strong>Gästekarte gratis</strong> mit dem Seehas nach Konstanz, Radolfzell, Singen, Hegau.</div>
+    <a href="tel:+4975333100" class="avail-link">Anrufen 07533/3100 →</a>
+  </div>
+</section>
+
+<!-- REASONS ROTATOR -->
+<section class="reasons">
+  <div class="reasons-eyebrow">~ Mehr Zeit zum ~</div>
+  <div class="reasons-line">
+    <span class="reasons-static">Mehr Zeit zum</span>
+    <span class="reasons-rotator">
+      <span class="rotating-word active">Träumen.</span>
+      <span class="rotating-word">Genießen.</span>
+      <span class="rotating-word">Durchatmen.</span>
+      <span class="rotating-word">Ankommen.</span>
+      <span class="rotating-word">Frühstücken.</span>
+      <span class="rotating-word">Bleiben.</span>
+    </span>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-eyebrow">— Unsere Pioniergeschichte</div>
+  <h2 class="reveal">Erstes Hotel in Allensbach mit<br><em>WLAN.</em> Erstes mit <em>Nichtraucher.</em><br>Erstes mit <span class="cookie-script">Sonnenkollektoren.</span></h2>
+  <div class="manifesto-anaphora">
+    <p>Erstes Hotel in Allensbach mit Du/WC im Zimmer.</p>
+    <p>Erstes Hotel in Allensbach mit Sat-TV.</p>
+    <p>Erstes Hotel in Allensbach mit W-Lan.</p>
+    <p>Erstes Hotel/Restaurant in Allensbach Nichtraucher.</p>
+    <p>Erstes mit Solar-Wärme — <em>seit 1983.</em></p>
+    <p>Erstes mit 100 % Wasserkraft — seit 1999.</p>
+    <p class="finale">Und wenn morgen Drohnen-Landeplätze<br>gefordert sind: <em>wir sind dabei.</em></p>
+  </div>
+  <div class="manifesto-tagline">
+    <span>seit 1983</span><span class="dot"></span><span>Allensbach</span><span class="dot"></span><span>Bodensee</span><span class="dot"></span><span>3 Generationen</span>
+  </div>
+</section>
+
+<!-- FAMILY STORY -->
+<section class="family-story" id="familie">
+  <div class="family-inner">
+    <div class="family-portrait">
+      <div class="portrait-stack"></div>
+      <div class="portrait-handnote">Familie Helmlinger,<br>fünf Köpfe, ein Haus.</div>
+    </div>
+    <div class="family-text">
+      <div class="family-eyebrow">— Drei Generationen Gastfreundschaft</div>
+      <h2 class="reveal">1983 stellte <em>Rose</em><br>die ersten Sonnenkollektoren <span class="cookie-script">aufs Dach.</span></h2>
+      <p class="lead">Damals galten Rose und Jürgen Helmlinger im Dorf als verrückt. Heute steht das Haus seit über vierzig Jahren — und die Solaranlage liefert immer noch warmes Wasser fürs Frühstück.</p>
+      <p>Aus dem Gasthaus Rose wurde <em>Hotel garni Haus Rose.</em> Aus zwei Gründern wurden <em>drei Generationen.</em> Aus einem Frühstückstisch wurde "Grandma's Best" — Roses Konfitüren, hausgemacht, jeden Morgen.</p>
+      <div class="generations">
+        <div class="gen-person">
+          <div class="gen-photo" style="background-image: url('https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=200&q=80');"></div>
+          <div class="gen-name">Felix</div>
+          <div class="gen-role">Generation III</div>
+        </div>
+        <div class="gen-person">
+          <div class="gen-photo" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80');"></div>
+          <div class="gen-name">Valbona</div>
+          <div class="gen-role">Gastgeberin</div>
+        </div>
+        <div class="gen-person">
+          <div class="gen-photo" style="background-image: url('https://images.unsplash.com/photo-1542327897-d73f4005b533?auto=format&fit=crop&w=200&q=80');"></div>
+          <div class="gen-name">Stefan</div>
+          <div class="gen-role">Geschäftsinhaber</div>
+        </div>
+        <div class="gen-person">
+          <div class="gen-photo" style="background-image: url('https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=200&q=80');"></div>
+          <div class="gen-name">Jürgen</div>
+          <div class="gen-role">Mit-Gründer · 1983</div>
+        </div>
+        <div class="gen-person">
+          <div class="gen-photo" style="background-image: url('https://images.unsplash.com/photo-1559548331-f9cb98280344?auto=format&fit=crop&w=200&q=80');"></div>
+          <div class="gen-name">Rose</div>
+          <div class="gen-role">Gründerin · 1983</div>
+        </div>
+      </div>
+      <p>Stefan führt heute das Haus. Valbona empfängt, Jürgen und Rose pflegen noch immer den Rosengarten, und Felix wächst mit auf — drei Generationen unter einem Dach, alle mit dem gleichen Familiennamen.</p>
+      <div class="family-motto">
+        <p>„Für die Gäste — <em>nur das Beste.</em><br>Diese Aussage ist für uns nicht nur ein Werbeslogan,<br>wir leben dieses Motto jeden Tag."</p>
+        <div class="sig">— Stefan Helmlinger</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section class="rooms" id="zimmer">
+  <div class="section-head">
+    <div class="eyebrow">Zehn Zimmer · zehn Bodensee-Orte</div>
+    <h2 class="reveal">Jedes Zimmer trägt<br>einen <em>Namen vom See.</em></h2>
+    <p class="sub">Höhrenberg, Mindelsee, Mainau, Reichenau — wir benennen unsere Zimmer nicht nach Nummern, sondern nach Orten, die du in Schuhweite erreichst. Alle mit Dusche/WC, Sat-TV, WLAN und kleinem Kühlschrank. Frühstück immer inklusive.</p>
+  </div>
+  <div class="rooms-grid">
+
+    <div class="room-card">
+      <div class="room-image room-1">
+        <div class="room-tag">Hofseite · ruhig</div>
+        <div class="room-num">Höhrenberg</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Höhrenberg</em></h3>
+        <div class="detail">Doppelzimmer · EG · sanfte Fliedertöne</div>
+        <p>Benannt nach dem Aussichtspunkt mit Gnadenkirche und Blick auf Untersee und Reichenau. Zur ruhigen Gartenseite — keine Konstanzerstraße im Ohr.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 129 €<span class="from"> / Nacht · Winter</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-2">
+        <div class="room-tag">Garten · Terrasse</div>
+        <div class="room-num">Rosengarten</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Rosengarten</em></h3>
+        <div class="detail">Doppelzimmer · EG · Terrasse + Gartenzugang</div>
+        <p>Direkt rein in Roses Rosengarten — buchstäblich. Eigene Terrasse, der Duft der Rosensträucher im Sommer. Stammgäste-Liebling.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 129 €<span class="from"> / Nacht</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-3">
+        <div class="room-tag">Einzel · Vintage</div>
+        <div class="room-num">Mindelsee</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Mindelsee</em></h3>
+        <div class="detail">Einzelzimmer · 1. OG · 140×200 Bett · Tageslicht-Bad</div>
+        <p>Vintage-Touch, großzügiges Einzelbett, Tageslicht-Bad. Benannt nach dem größten See auf dem Bodanrück — Allensbacher Naturschutzgebiet.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 69 €<span class="from"> / Nacht</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-4">
+        <div class="room-tag">Morgensonne</div>
+        <div class="room-num">Eichelrain</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Eichelrain</em></h3>
+        <div class="detail">Doppelzimmer · 1. OG · rustikal · Ost-Lage</div>
+        <p>Morgensonne durch die Bäume, Gartenblick. Benannt nach dem Panoramaweg Richtung Kloster Hegne. Wer früh aufsteht, kriegt das beste Licht.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 129 €<span class="from"> / Nacht</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-5">
+        <div class="room-tag">Großer Balkon Süd-Ost</div>
+        <div class="room-num">Mainau</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Mainau</em></h3>
+        <div class="detail">Doppelzimmer · 1. OG · tropisch · Süd-Ost-Balkon</div>
+        <p>Tropisch eingerichtet wie ein Spaziergang über die Blumeninsel. Großer Balkon Süd-Ost — Frühstück im Freien an warmen Tagen.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 129 €<span class="from"> / Nacht</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-6">
+        <div class="room-tag">Teil-Seeblick · Süd</div>
+        <div class="room-num">Seehäsle</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Seehäsle</em></h3>
+        <div class="detail">Doppelzimmer · 1. OG · skandinavisch · Süd-Balkon · Boxspring</div>
+        <p>Skandinavische Klarheit, Boxspringbett, Süd-Balkon mit Teil-Seeblick. Benannt nach der Bodensee-S-Bahn, die dich gratis mit der Gästekarte rumbringt.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 129 €<span class="from"> / Nacht</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-7">
+        <div class="room-tag">Modern · Südbalkon</div>
+        <div class="room-num">Wildpark</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Wildpark</em></h3>
+        <div class="detail">Doppelzimmer · 1. OG · modern · Südbalkon mit Teil-Seeblick</div>
+        <p>Modern eingerichtet, Südbalkon mit Teil-Seeblick (im Sommer schauen die Bäume mit). Benannt nach dem Wild- und Freizeitpark Bodanrück nebenan.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 129 €<span class="from"> / Nacht</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-8">
+        <div class="room-tag">Comfort · Riesenbalkon</div>
+        <div class="room-num">Konstanz</div>
+      </div>
+      <div class="room-body">
+        <h3>Zimmer <em>Konstanz</em></h3>
+        <div class="detail">Comfort-Doppelzimmer · Industrial · 160×200 · Süd-West-Balkon</div>
+        <p>Industrial-Style, 160×200 Bett, der größte Balkon im Haus — Süd-West, Abendsonne garantiert. Benannt nach „der Stadt am See", 12 Minuten weiter.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 169 €<span class="from"> / Nacht · Sommer</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-9">
+        <div class="room-tag">Superior Suite · DG</div>
+        <div class="room-num">Seerosen</div>
+      </div>
+      <div class="room-body">
+        <h3>Suite <em>Seerosen</em></h3>
+        <div class="detail">Superior Suite · DG · 2 Schlafräume · Küchenzeile · 200×200</div>
+        <p>Dachgeschoss-Suite mit zwei Schlafräumen, Esstisch, Küchenzeile, großem Balkon. Doppelbett 200×200, frz. Bett 160×200, Schlafcouch — für längere Aufenthalte gemacht.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 199 €<span class="from"> / Nacht · Sommer</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-card">
+      <div class="room-image room-10">
+        <div class="room-tag">Familiensuite · 2 Balkone</div>
+        <div class="room-num">Reichenau</div>
+      </div>
+      <div class="room-body">
+        <h3>Familiensuite <em>Reichenaublick</em></h3>
+        <div class="detail">DG · sep. Schlafzimmer · Einbauküche · 2 Balkone · bis 5 Pers.</div>
+        <p>Zwei Balkone, eigene Küche, separates Schlafzimmer, Blick zur UNESCO-Insel Reichenau. Unser Familien-Liebling für längere Bodensee-Wochen.</p>
+        <div class="room-meta">
+          <div class="room-price"><span class="from">ab</span> 199 €<span class="from"> / Nacht · bis 5 Pers.</span></div>
+          <a href="#kontakt" class="room-link">Anfragen →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="rooms-pricing-note">
+    <p>Alle Preise inkl. Frühstück · zzgl. Kurtaxe · <em>Sommer:</em> EZ 99 € / DZ 169 € / Familiensuite ab 199 € · <em>Winter:</em> EZ ab 69 € / DZ ab 129 € / Familiensuite ab 189 €</p>
+  </div>
+</section>
+
+<!-- BREAKFAST -->
+<section class="breakfast" id="fruehstueck">
+  <div class="breakfast-grid">
+    <div class="breakfast-text">
+      <div class="eyebrow">— Grandma's Best</div>
+      <h2>Roses Konfitüren.<br>Jeden <em>Morgen</em><br><span class="cookie-script">hausgemacht.</span></h2>
+      <p>Hotel garni heißt: kein Restaurant, dafür ein Frühstücks-Buffet, das wir wirklich ernst nehmen. „Reichhaltiges Frühstück" steht auf unserer Site — was das wirklich bedeutet:</p>
+      <ul class="breakfast-list">
+        <li><div class="b-num">I.</div><div><em>Hausgemachte Aufstriche & Konfitüren</em> — Rezepte von Rose, fortgeführt durch die Familie. „Grandma's Best" steht nicht aus Marketing-Gründen so im Frühstücksraum.</div></li>
+        <li><div class="b-num">II.</div><div><em>Vegane Frühstücksalternativen</em> — wir kommen aus 1983, aber wir leben in 2026.</div></li>
+        <li><div class="b-num">III.</div><div><em>Wasser aus dem Hahn</em> — kommt direkt von den Quellen des Mindelsees. Kein Flaschen-Schleppen, kein Plastikberg.</div></li>
+        <li><div class="b-num">IV.</div><div><em>Mehrweg statt Einweg</em> — Getränke meist von der Randegger Ottilien-Quelle aus dem Hegau.</div></li>
+        <li><div class="b-num">V.</div><div><em>BIO und regional</em> — wo es geht, in Zukunft noch mehr.</div></li>
+      </ul>
+    </div>
+    <div class="breakfast-image">
+      <div class="breakfast-caption">
+        <div class="label">Heute Morgen 7:42</div>
+        <div class="value">Honig vom Nachbarn.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences" id="bodensee">
+  <div class="section-head">
+    <div class="eyebrow">— In der Nähe</div>
+    <h2 class="reveal">Bodensee in <em>fünf Minuten.</em><br>Mainau in zehn.</h2>
+    <p class="sub">Allensbach liegt mitten drin. Egal ob du wandern, paddeln, Klöster erkunden oder einfach nur am Wasser sitzen willst — du brauchst kaum Sprit dafür.</p>
+  </div>
+  <div class="exp-grid">
+
+    <div class="exp-card">
+      <div class="exp-card-bg exp-1"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-card-meta">
+          <span class="distance">10 Min</span>
+          <span>Insel · Park · Schloss</span>
+        </div>
+        <h3>Insel <em>Mainau</em></h3>
+        <p>Die Blumeninsel ist nur eine kurze Brücke entfernt. Wir geben dir den Rabatt-Code.</p>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-card-bg exp-2"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-card-meta">
+          <span class="distance">5 Min</span>
+          <span>UNESCO · Klöster</span>
+        </div>
+        <h3>Insel <em>Reichenau</em></h3>
+        <p>Drei mittelalterliche Klöster, Gemüse-Felder bis zum Ufer, UNESCO-Welterbe. Beste Tomaten der Region.</p>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-card-bg exp-3"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-card-meta">
+          <span class="distance">12 Min</span>
+          <span>Altstadt · Hafen</span>
+        </div>
+        <h3>Konstanz <em>direkt am See</em></h3>
+        <p>Konzilstadt, mittelalterliche Altstadt, Hafen, Schweizer Seite zwei Minuten weiter. Per Schiff oder Auto.</p>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-card-bg exp-4"></div>
+      <div class="exp-card-overlay"></div>
+      <div class="exp-card-content">
+        <div class="exp-card-meta">
+          <span class="distance">gratis</span>
+          <span>mit Gästekarte</span>
+        </div>
+        <h3>Seehas — <em>kostenlos</em></h3>
+        <p>Mit der Gästekarte fährst du gratis mit dem Seehas (Bodensee-S-Bahn) nach Konstanz, Radolfzell, Singen und in den Hegau. Drinnen 350 m zum Ufer, 250 m zum Bahnhof.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ALLENSBACH FIRSTS TIMELINE -->
+<section class="firsts">
+  <div class="section-head">
+    <div class="eyebrow">— Pioniergeist seit 1983</div>
+    <h2 class="reveal">Allensbachs <em>Erste</em><br>in vielen Dingen.</h2>
+    <p class="sub">Wir lieben es, vorauszugehen. Hier ist die ehrliche Liste — keine Marketing-Behauptungen, nur das was Stefan stolz erzählt, wenn man fragt.</p>
+  </div>
+  <div class="timeline">
+    <div class="time-event">
+      <div class="time-year">1983</div>
+      <div class="time-detail">
+        <h4>Sonnenkollektoren aufs Dach</h4>
+        <p>Rose und Jürgen gründen das Gasthaus Rose — und installieren als <em>erstes Hotel in Allensbach</em> Solarthermie. Damals galten sie als Spinner. Heute heizen die Kollektoren immer noch das Frühstückswasser.</p>
+      </div>
+    </div>
+    <div class="time-event">
+      <div class="time-year">1990er</div>
+      <div class="time-detail">
+        <h4>Erstes Hotel mit Du/WC im Zimmer</h4>
+        <p>Damals galt im Dorf: Etagenklo reicht. Wir dachten: nö. Jedes Zimmer kriegt sein eigenes Bad. Heute selbstverständlich, damals revolutionär.</p>
+      </div>
+    </div>
+    <div class="time-event">
+      <div class="time-year">1999</div>
+      <div class="time-detail">
+        <h4>100 % Wasserkraft-Strom</h4>
+        <p>Seit '99 beziehen wir unseren kompletten Strom aus regionaler Wasserkraft — Stadtwerk am See, Switch-Energie. <em>Kein Greenwashing, ein 25-Jahre-Vertrag.</em></p>
+      </div>
+    </div>
+    <div class="time-event">
+      <div class="time-year">2000er</div>
+      <div class="time-detail">
+        <h4>Erstes Hotel mit Sat-TV und WLAN</h4>
+        <p>Als Nachbarn noch über Empfangsstörungen schimpften, hatten unsere Gäste schon Schnellinternet. Wir lesen mit, was Gäste brauchen.</p>
+      </div>
+    </div>
+    <div class="time-event">
+      <div class="time-year">2010er</div>
+      <div class="time-detail">
+        <h4>Erstes Nichtraucher-Hotel & Restaurant</h4>
+        <p>Lange vor der gesetzlichen Pflicht. Wir wollten Frühstücksluft, kein Aschenbecher-Geruch im Flur.</p>
+      </div>
+    </div>
+    <div class="time-event">
+      <div class="time-year">2020er</div>
+      <div class="time-detail">
+        <h4>Hybrid-Flotte · 24/7 Self-Check-in via Keyboy</h4>
+        <p>Unsere KFZ-Flotte ist auf Elektro/Hybrid umgestellt. Anreise rund um die Uhr per Code-Box — modern, persönlich bleibt es trotzdem.</p>
+      </div>
+    </div>
+    <div class="time-event finale">
+      <div class="time-year">Morgen</div>
+      <div class="time-detail">
+        <h4>Drohnen-Landeplatz?</h4>
+        <p>„Und wenn morgen Drohnen-Landeplätze gefordert sind: <em>wir sind dabei.</em>" — Stefans Original-Worte auf der eigenen Website.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section class="sustainability" id="nachhaltigkeit">
+  <div class="section-head">
+    <div class="eyebrow">— Was nachhaltig heißt, wenn man's wirklich meint</div>
+    <h2 class="reveal">Für den Gast. Für die Umwelt.<br>Für die <em>nächste Generation.</em></h2>
+  </div>
+  <div class="sustain-grid">
+    <div class="sustain-item">
+      <div class="sustain-icon">☀️</div>
+      <h4>Solarthermie seit 1983</h4>
+      <p>Sonne heizt unser Wasser. Stiller Pionier vom ersten Tag.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">⚡</div>
+      <h4>100 % Wasserkraft</h4>
+      <p>Strom aus regionalen Anbietern, seit 1999.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">🚗</div>
+      <h4>Hybrid- & E-Flotte</h4>
+      <p>Unsere KFZ schon lange umgestellt.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">🌱</div>
+      <h4>BIO & regional</h4>
+      <p>Wir kaufen bei regionalen Händlern, immer mehr BIO.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">🍞</div>
+      <h4>Hausgemachte Aufstriche</h4>
+      <p>„Grandma's Best" — Roses Konfitüren-Erbe. Vegane Optionen immer dabei.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">💧</div>
+      <h4>Mehrweg statt Plastik</h4>
+      <p>Randegger Ottilien-Quelle aus dem Hegau. Keine PET-Berge.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">🧼</div>
+      <h4>FROSCH-Reinigung</h4>
+      <p>Wo es geht: umweltschonende Putzmittel.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">🤝</div>
+      <h4>Inklusives Team</h4>
+      <p>Festanstellung statt Saisonarbeit. Menschen mit Einschränkung dabei.</p>
+    </div>
+    <div class="sustain-item">
+      <div class="sustain-icon">💧</div>
+      <h4>Hahnenwasser vom Mindelsee</h4>
+      <p>„Das frische Wasser aus Ihrem Wasserhahn kommt von den Quellen des Mindelsee."</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust">
+  <div class="section-head">
+    <div class="eyebrow">— Was Gäste wirklich sagen</div>
+    <h2 class="reveal">Was uns <em>trägt.</em></h2>
+    <p class="sub">Wir nehmen die Bewertungen ernst, die uns die Gäste über die Jahre hinterlassen haben — vom ersten Buchungsportal bis Google. Hier die ehrlichen Zahlen.</p>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-item">
+      <div class="trust-num">4,5<span>★</span></div>
+      <div class="trust-platform">Google Maps</div>
+      <div class="trust-count">aus 197 Bewertungen</div>
+    </div>
+    <div class="trust-item highlight">
+      <div class="trust-num">8,7<span>/10</span></div>
+      <div class="trust-platform">Booking.com</div>
+      <div class="trust-count">aus 412 verifizierten Aufenthalten</div>
+      <div class="trust-sub">Sauberkeit 9,3 · Personal 9,2 · Lage 9,1</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">6,0<span>/6</span></div>
+      <div class="trust-platform">HolidayCheck</div>
+      <div class="trust-count">aus 19 Bewertungen</div>
+    </div>
+  </div>
+  <div class="trust-finepoint">
+    <p>„Gasthaus Rose neu: Haus Rose Hotel garni" — wer uns bei <em>Tripadvisor</em> noch unter dem alten Namen findet, ist nicht verloren. Wir sind dieselben.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-head">
+    <div class="eyebrow">— Was Gäste sagen</div>
+    <h2 class="reveal">Stimmen, die <em>wiederkommen.</em></h2>
+  </div>
+  <div class="test-stage">
+    <blockquote class="testimonial active" data-idx="0">
+      <div class="test-quote">Moderne Zimmer in der Nähe des Sees, tolle Marmelade zum Frühstück :)</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80');"></div>
+        <div class="test-info">
+          <div class="name">Gast via Tripadvisor</div>
+          <div class="role">verifizierte Bewertung</div>
+        </div>
+      </div>
+    </blockquote>
+
+    <blockquote class="testimonial" data-idx="1">
+      <div class="test-quote">Der Besitzer war durchweg sehr freundlich und auch beim Frühstück sehr aufmerksam. Nette Gastgeber, freundliches Reinigungspersonal.</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80');"></div>
+        <div class="test-info">
+          <div class="name">Gast via Tripadvisor</div>
+          <div class="role">verifizierte Bewertung</div>
+        </div>
+      </div>
+    </blockquote>
+
+    <blockquote class="testimonial" data-idx="2">
+      <div class="test-quote">Sehr gutes Frühstück mit reichhaltiger Auswahl und täglich frischem Obstsalat. Ruhige Lage in Fußnähe zu Ortsmitte und See, kostenlose Privatparkplätze.</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80');"></div>
+        <div class="test-info">
+          <div class="name">Gast via Booking.com</div>
+          <div class="role">8,7 / 10 · 412 Bewertungen</div>
+        </div>
+      </div>
+    </blockquote>
+
+    <blockquote class="testimonial" data-idx="3">
+      <div class="test-quote">Wir kommen wieder…</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80');"></div>
+        <div class="test-info">
+          <div class="name">Gast via Tripadvisor</div>
+          <div class="role">Review-Titel · sagt alles</div>
+        </div>
+      </div>
+    </blockquote>
+  </div>
+  <div class="test-dots">
+    <span class="test-dot active" data-idx="0"></span>
+    <span class="test-dot" data-idx="1"></span>
+    <span class="test-dot" data-idx="2"></span>
+    <span class="test-dot" data-idx="3"></span>
+  </div>
+  <div class="trust-finepoint" style="margin-top:48px;">
+    <p>Echte Stimmen aus aktuellen Bewertungen. <em>Stefan: bitte 3-5 deiner Lieblings-Reviews schicken — die gehen 1:1 in die Live-Site.</em></p>
+  </div>
+</section>
+
+<!-- BOOKING CTA -->
+<section class="booking" id="kontakt">
+  <div class="booking-inner">
+    <div class="booking-eyebrow">~ So einfach geht's ~</div>
+    <h2>Ruf einfach <em>an.</em><br>Oder komm <em>direkt.</em></h2>
+    <p>Bei uns musst du dich nicht durch ein Buchungssystem klicken. Stefan oder Valbona ist meistens am Telefon. Wer spät ankommt: kein Problem — Code per Mail, Schlüssel-Box neben dem Eingang, 24 Stunden am Tag.</p>
+    <a href="tel:+4975333100" class="booking-phone">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.02.24l-2.2 2.2a15.07 15.07 0 01-6.59-6.59l2.2-2.21a.96.96 0 00.25-1A11.36 11.36 0 018.5 4a1 1 0 00-1-1H4a1 1 0 00-1 1 17 17 0 0017 17 1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
+      07533 / 3100
+    </a>
+    <div class="booking-perks">
+      <div class="perk">✓ Gratis Parkplatz garantiert · Parkticket erstatten wir</div>
+      <div class="perk">✓ 24/7 Anreise via Keyboy</div>
+      <div class="perk">✓ Stornierung kostenfrei bis 7 Tage vorher</div>
+    </div>
+    <div class="booking-alt">Oder schreib uns: <a href="mailto:info@haus-rose.de">info@haus-rose.de</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-mark">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <path d="M4 26 L13 18 L22 26 L22 38 L4 38 Z" fill="#6B96B0" opacity="0.85"/>
+            <path d="M4 26 L13 18 L22 26" fill="none" stroke="#3D6F8E" stroke-width="0.8"/>
+            <rect x="11" y="29" width="4" height="9" fill="#F8F2E8" opacity="0.7"/>
+            <g transform="translate(33, 24)">
+              <circle r="12" fill="#D87171" opacity="0.85"/>
+              <circle r="7" fill="#C4663B" opacity="0.7"/>
+              <circle r="3.5" fill="#9B4A22"/>
+              <ellipse cx="-6" cy="6" rx="6" ry="3" fill="#7A8C5F" opacity="0.7" transform="rotate(-30)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="footer-name">Haus <em>Rose</em></div>
+      <div class="footer-tag">„Mehr Zeit zum Träumen & Genießen…"</div>
+      <div class="footer-address">
+        Konstanzerstraße 23<br>
+        78476 Allensbach am Bodensee<br>
+        +49 7533 3100<br>
+        info@haus-rose.de<br>
+        <em>Inhaber: Familie Helmlinger</em>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Aufenthalt</h5>
+      <a href="#zimmer">Zimmer & Preise</a>
+      <a href="#fruehstueck">Frühstück</a>
+      <a href="#">Verfügbarkeit</a>
+      <a href="#">Gutscheine</a>
+    </div>
+    <div class="footer-col">
+      <h5>Rund ums Haus</h5>
+      <a href="#bodensee">Bodensee-Tipps</a>
+      <a href="#familie">Unsere Familie</a>
+      <a href="#">Anfahrt</a>
+      <a href="#">Hund willkommen?</a>
+    </div>
+    <div class="footer-col">
+      <h5>Im Netz</h5>
+      <a href="#">Instagram</a>
+      <a href="#">Booking.com</a>
+      <a href="#">TripAdvisor</a>
+      <a href="#">Bewertungen</a>
+    </div>
+  </div>
+  <div class="footer-easter">
+    <p class="easter-motto">„Und wenn morgen Drohnen-Landeplätze gefordert sind:<br><em>wir sind dabei.</em>"</p>
+    <p class="easter-note">— Stefan Helmlinger, auf der eigenen Website. Wir haben gelesen.</p>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Haus Rose · Familie Helmlinger · Allensbach am Bodensee</div>
+    <div>Impressum · Datenschutz · AGB</div>
+  </div>
+</footer>
+
+<script>
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) loader.classList.add('gone');
+      setTimeout(() => { if (loader) loader.style.display = 'none'; }, 900);
+    }, 500);
+  });
+
+  // Scroll progress
+  const progressBar = document.getElementById('scrollProgress');
+  function updateScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  // Nav background opacity on scroll
+  const nav = document.querySelector('nav.top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.style.background = 'rgba(251, 247, 239, 0.95)';
+      nav.style.borderBottomColor = 'rgba(196, 102, 59, 0.15)';
+    } else {
+      nav.style.background = 'rgba(251, 247, 239, 0.82)';
+      nav.style.borderBottomColor = 'rgba(196, 102, 59, 0.08)';
+    }
+  }, { passive: true });
+
+  // Reasons rotator
+  const rotatingWords = document.querySelectorAll('.rotating-word');
+  if (rotatingWords.length) {
+    let rotIdx = 0;
+    setInterval(() => {
+      const cur = rotatingWords[rotIdx];
+      cur.classList.remove('active');
+      cur.classList.add('exiting');
+      rotIdx = (rotIdx + 1) % rotatingWords.length;
+      setTimeout(() => {
+        rotatingWords.forEach(w => w.classList.remove('exiting'));
+        rotatingWords[rotIdx].classList.add('active');
+      }, 600);
+    }, 2600);
+  }
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+  document.querySelectorAll('.reveal, .manifesto-anaphora').forEach(el => revealObserver.observe(el));
+
+  // Testimonial rotation
+  const testItems = document.querySelectorAll('.test-stage .testimonial');
+  const testDots = document.querySelectorAll('.test-dot');
+  if (testItems.length) {
+    let tIdx = 0;
+    let tTimer;
+    function setTest(i) {
+      testItems.forEach((t, idx) => t.classList.toggle('active', idx === i));
+      testDots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+      tIdx = i;
+    }
+    function nextTest() { setTest((tIdx + 1) % testItems.length); }
+    tTimer = setInterval(nextTest, 8000);
+    testDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        clearInterval(tTimer);
+        setTest(parseInt(dot.dataset.idx, 10));
+        tTimer = setInterval(nextTest, 8000);
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
